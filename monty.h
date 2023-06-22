@@ -20,10 +20,10 @@
  */
 typedef struct stack_s
 {
-        int n;
-        struct stack_s *prev;
-        struct stack_s *next;
-} stack_t; 
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
+} stack_t;
 
 /**
  * struct instruction_s - opcode and its function
@@ -35,13 +35,31 @@ typedef struct stack_s
  */
 typedef struct instruction_s
 {
-        char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct global_s - buffer and stack
+ * @input: input buffer
+ * @input_token: buffer arguments
+ * @head: head of stack
+ *
+ * Description: opcode buffer and its function
+ * for stack, queues, LIFO, FIFO
+ */
+typedef struct global_s
+{
+	char *input;
+	char **input_token;
+	stack_t *head;
+} global_t;
+
+extern global_t var;
 
 void usage_check(int, FILE *, char *);
 char *read_input(FILE *file, ssize_t *);
-void free_buf(char **input_token);
-char **parse_input(char *input);
+void free_buf(void);
+char **parse_input(void);
+void (*opcode_check(char *))(stack_t **, unsigned int);
 #endif

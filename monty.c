@@ -7,25 +7,29 @@
  */
 int main(int ac, char **av)
 {
-	ssize_t input_len = 0;
-	char *input = NULL, **input_token = NULL;
 	FILE *file = fopen(av[1], "r");
-	int i = 0, line_number = 1;
+	ssize_t input_len = 0;
+	size_t i = 0, line_number = 1;
+	global_t var
+	{
+		char *input = NULL;
+		char **input_token = NULL;
+		stack_t *head = NULL;
+	};
 
 	usage_check(ac, file, av[1]);
 
 	while (input_len != -1)
 	{
-		input = read_input(file, &input_len);
+		var.input = read_input(file, &input_len);
 		if (input_len == -1)
 			break;
-		printf("%ld\n", input_len);
-		input_token = parse_input(input);
-		/* execute(input_token); */
-		free(input);
-		free_buf(input_token);
+		var.input_token = parse_input();
+		execute(line_number);
+		free(var.input);
+		free_buf(var.input_token);
 	}
-	free(input);
+	free(var.input);
 	fclose(file);
 	return (0);
 }
