@@ -37,6 +37,14 @@ typedef struct stack_s
         struct stack_s *next;
 } stack_t; 
 
+typedef struct param
+{
+	int n;
+	stack_t *top;
+	stack_t *tail;
+} global_t;
+
+global_t *globv;
 /**
  * struct instruction_s - opcode and its function
  * @opcode: the opcode
@@ -53,10 +61,13 @@ typedef struct instruction_s
 
 void add_func(stack_t **stack, unsigned int line_number);
 
+global_t *make_node(void);
 void usage_check(int, FILE *, char *);
 char *read_input(FILE *, ssize_t *);
 void free_buf(char **);
 char **parse_input(char *, FILE *);
 void err_and_exit(char *, char **, FILE *, const char * const, ...);
 void (*get_func(char *, char **, FILE *, size_t))(stack_t **, unsigned int);
+void push_func(stack_t **stack, unsigned int line_number);
+void pall_func(stack_t **stack, unsigned int line_number);
 #endif

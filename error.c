@@ -29,7 +29,7 @@ void print_char(va_list pam)
  */
 void print_int(va_list pam)
 {
-	fprintf(stderr, "%d", va_arg(pam, int));
+	fprintf(stderr, "%u", va_arg(pam, int));
 }
 /**
  * print_string - prints a string
