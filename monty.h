@@ -51,10 +51,12 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+void add_func(stack_t **stack, unsigned int line_number);
 
 void usage_check(int, FILE *, char *);
-char *read_input(FILE *file, ssize_t *);
-void free_buf(char **input_token);
-char **parse_input(char *input);
-void err_and_exit(char *input, char **token, const char * const format, ...);
+char *read_input(FILE *, ssize_t *);
+void free_buf(char **);
+char **parse_input(char *, FILE *);
+void err_and_exit(char *, char **, FILE *, const char * const, ...);
+void (*get_func(char *, char **, FILE *, size_t))(stack_t **, unsigned int);
 #endif

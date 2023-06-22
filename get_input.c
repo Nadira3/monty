@@ -35,7 +35,7 @@ char *read_input(FILE *file, ssize_t *input_len)
  * @input: command line
  * Return: command - argument pair, null terminated
  */
-char **parse_input(char *input)
+char **parse_input(char *input, FILE *f)
 {
 	char *str_token = NULL, *ptr = NULL;
 	char **input_token = NULL;
@@ -45,7 +45,7 @@ char **parse_input(char *input)
 	{
 		input_token = malloc(sizeof(char*) * 3);
 		if (!input_token)
-			err_and_exit(input, NULL, "s", "Error: malloc failed");
+			err_and_exit(input, NULL, f, "s", "Error: malloc failed");
 		ptr = input;
 		while (*ptr && *ptr == ' ')
 			ptr++;
@@ -57,7 +57,7 @@ char **parse_input(char *input)
 			if (!(input_token[i]))
 			{
 				input_token[i] = NULL;
-				err_and_exit(input, input_token, "s", "Error: malloc failed");
+				err_and_exit(input, input_token, f, "s", "Error: malloc failed");
 			}
 			strncpy(input_token[i], str_token, len);
 			input_token[i][len] = '\0';
@@ -68,34 +68,3 @@ char **parse_input(char *input)
 	}
 	return (input_token);
 }
-
-/**
- * opcode_check - checks the validity of an instruction
- * @command: opcode instruction
- * Return: function pointer
- *
-void (*opcode_check(char *command))(stack_t **stack, unsigned int line_number)
-{
-        int i = 0;
-        instruction_t instruction[] = {
-                {"add", add_func},
-                {"push", push_func},
-                {"pop", pop_func},
-                {"pint", pint_func},
-                {"pall", pall_func},
-                {"nop", nop_func},
-                {"swap", swap_func},
-                {NULL, NULL}
-        };
-
-        if (command)
-        {
-                while(instruction.opcode[i])
-                {
-                        if (!(strcmp(command, instruction.opcode[i])))
-                                return (instruction.f[i]);
-                        i++;
-                }
-        }
-        return (instruction.f[i]);
-}*/

@@ -10,10 +10,10 @@ void usage_check(int arg_count, FILE *file, char *path)
 	char *filename = NULL;
 
 	if (arg_count != 2)
-		err_and_exit(NULL, NULL, "s", "USAGE: monty file");
+		err_and_exit(NULL, NULL, NULL, "s", "USAGE: monty file");
 	filename = basename(path);
 	if (!file)
-		err_and_exit(NULL, NULL, "ss", "Error: Can't open file ", filename);
+		err_and_exit(NULL, NULL, NULL, "ss", "Error: Can't open file ", filename);
 }
 /**
  * print_char - prints a character
@@ -41,7 +41,7 @@ void print_string(va_list pam)
 
 	fprintf(stderr, "%s", ptr ? ptr : "(nil)");
 }
-void err_and_exit(char *input, char **token, const char * const format, ...)
+void err_and_exit(char *input, char **token, FILE *file, const char * const format, ...)
 {
         va_list pam;
         int i = 0, j;
@@ -77,5 +77,7 @@ void err_and_exit(char *input, char **token, const char * const format, ...)
                 free(input);
         if (token)
                 free_buf(token);
+	if (file)
+		fclose(file);
         exit(EXIT_FAILURE);
 }
