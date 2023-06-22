@@ -1,4 +1,17 @@
 #include "monty.h"
+
+/**
+ * free_buf - frees a multidimensional array
+ * @input_token; array
+ */
+void free_buf(char **input_token)
+{
+	int i = 0;
+
+	while (input_token[i])
+		free(input_token[i++]);
+	free(input_token);
+}
 /**
  * read_input - reads a line of input from a file
  * @file: file stream
@@ -32,10 +45,7 @@ char **parse_input(char *input)
 	{
 		input_token = malloc(sizeof(char*) * 3);
 		if (!input_token)
-		{
-			fprintf(stderr, "Error: malloc failed\n");
-			return (NULL);
-		}
+			err_and_exit(input, NULL, "s", "Error: malloc failed");
 		ptr = input;
 		while (*ptr && *ptr == ' ')
 			ptr++;
@@ -46,10 +56,8 @@ char **parse_input(char *input)
 			input_token[i] = malloc(len + 1);
 			if (!(input_token[i]))
 			{
-				fprintf(stderr, "Error: malloc failed\n");
 				input_token[i] = NULL;
-				free_buf(input_token); /* write your free func */
-				return (NULL);
+				err_and_exit(input, input_token, "s", "Error: malloc failed");
 			}
 			strncpy(input_token[i], str_token, len);
 			input_token[i][len] = '\0';
@@ -61,16 +69,33 @@ char **parse_input(char *input)
 	return (input_token);
 }
 
-void (*opcode_check(char *opcode))(stack_t **stack, unsigned int line_number)
+/**
+ * opcode_check - checks the validity of an instruction
+ * @command: opcode instruction
+ * Return: function pointer
+ *
+void (*opcode_check(char *command))(stack_t **stack, unsigned int line_number)
 {
-	instruction_t instruction[] = {
-		{"add", add},
-		{"push", push},
-		{"pop", pop},
-		{"pint", pint},
-		{"pall", pall},
-		{"nop", nop},
-		{"swap", swap},
-		{NULL, NULL}
-	}
-}
+        int i = 0;
+        instruction_t instruction[] = {
+                {"add", add_func},
+                {"push", push_func},
+                {"pop", pop_func},
+                {"pint", pint_func},
+                {"pall", pall_func},
+                {"nop", nop_func},
+                {"swap", swap_func},
+                {NULL, NULL}
+        };
+
+        if (command)
+        {
+                while(instruction.opcode[i])
+                {
+                        if (!(strcmp(command, instruction.opcode[i])))
+                                return (instruction.f[i]);
+                        i++;
+                }
+        }
+        return (instruction.f[i]);
+}*/

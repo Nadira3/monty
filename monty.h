@@ -8,6 +8,18 @@
 #include <unistd.h>
 #include <libgen.h>
 #include <stddef.h>
+#include <stdarg.h>
+
+/**
+ * struct op - has two elements
+ * @format: op format
+ * @f: function pointer
+ */
+typedef struct op
+{
+	char *format;
+	void (*f)(va_list pam);
+} form_t;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -44,4 +56,5 @@ void usage_check(int, FILE *, char *);
 char *read_input(FILE *file, ssize_t *);
 void free_buf(char **input_token);
 char **parse_input(char *input);
+void err_and_exit(char *input, char **token, const char * const format, ...);
 #endif

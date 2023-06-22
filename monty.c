@@ -10,7 +10,6 @@ int main(int ac, char **av)
 	ssize_t input_len = 0;
 	char *input = NULL, **input_token = NULL;
 	FILE *file = fopen(av[1], "r");
-	int i = 0, line_number = 1;
 
 	usage_check(ac, file, av[1]);
 
