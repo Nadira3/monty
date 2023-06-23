@@ -82,3 +82,22 @@ void pstr_func(stack_t **stack, unsigned int line_number)
 		puts("");
 	}
 }
+
+/**
+ * rotl_func - pushes a node to the stack
+ * @stack: stack
+ * @line_number: line number of fike
+ */
+void rotl_func(stack_t **stack, unsigned int line_number)
+{
+	stack_t *ptr = *stack;
+
+	if (!isEmpty())
+	{
+		while (ptr->next)
+		{
+			swap_func(&ptr, line_number);
+			ptr = ptr->next;	
+		}
+	}
+}

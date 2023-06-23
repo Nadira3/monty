@@ -22,6 +22,8 @@ void (*opcode_check(char *command))(stack_t **stack, unsigned int line_number)
 		{"mod", mod_func},
 		{"pchar", pchar_func},
 		{"pstr", pstr_func},
+		{"rotl", rotl_func},
+		{"rotr", rotr_func},
 		{NULL, NULL}
 	};
 
