@@ -3,20 +3,18 @@
 /**
  * nop_func - pushes a node to the stack
  * @stack: stack
- * @line_number: line number of fike
+ * @line_number: line number of file
  */
 void nop_func(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
-
-	return;
 }
 
 /**
  * swap_func - pushes a node to the stack
  * @stack: stack
- * @line_number: line number of fike
+ * @line_number: line number of file
  */
 void swap_func(stack_t **stack, unsigned int line_number)
 {
@@ -35,7 +33,7 @@ void swap_func(stack_t **stack, unsigned int line_number)
 /**
  * add_func - pushes a node to the stack
  * @stack: stack
- * @line_number: line number of fike
+ * @line_number: line number of file
  */
 void add_func(stack_t **stack, unsigned int line_number)
 {
@@ -56,7 +54,7 @@ void add_func(stack_t **stack, unsigned int line_number)
 /**
  * sub_func - pushes a node to the stack
  * @stack: stack
- * @line_number: line number of fike
+ * @line_number: line number of file
  */
 void sub_func(stack_t **stack, unsigned int line_number)
 {
@@ -77,7 +75,7 @@ void sub_func(stack_t **stack, unsigned int line_number)
 /**
  * div_func - pushes a node to the stack
  * @stack: stack
- * @line_number: line number of fike
+ * @line_number: line number of file
  */
 void div_func(stack_t **stack, unsigned int line_number)
 {

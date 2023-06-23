@@ -97,7 +97,7 @@ void rotl_func(stack_t **stack, unsigned int line_number)
 		while (ptr->next)
 		{
 			swap_func(&ptr, line_number);
-			ptr = ptr->next;	
+			ptr = ptr->next;
 		}
 	}
 }
