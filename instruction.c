@@ -72,3 +72,21 @@ void pint_func(stack_t **stack, unsigned int line_number)
 		fprintf(stdout, "%d\n", ptr->n);
 	}
 }
+
+/**
+ * pop_func - pushes a node to the stack
+ * @stack: stack
+ * @line_number: line number of fike
+ */
+void pop_func(stack_t **stack, unsigned int line_number)
+{
+	stack_t *ptr = *stack;
+	(void)line_number;
+
+	if (!isEmpty())
+	{
+		ptr = ptr->next;
+		free(*stack);
+		*stack = ptr;
+	}
+}
