@@ -113,7 +113,7 @@ void (*g(char *s, char **t, FILE * f, size_t l))(stack_t **st, unsigned int l)
 		err_and_exit(s, t, f, "cis", 'L', l, use);
 	if (t)
 	{
-		if (!strcmp(*t, "pint"))
+		if (!strcmp(*t, "pint") || !strcmp(*t, "pop"))
 		{
 			if (isEmpty())
 				err_and_exit(s, t, f, "cis", 'L', l, pt);
