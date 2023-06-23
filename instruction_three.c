@@ -74,13 +74,15 @@ void pstr_func(stack_t **stack, unsigned int line_number)
 	{
 		while (ptr)
 		{
-			if (ptr->n <= 0 || ptr->n > 127)
+			if (ptr->n == 0 || !isascii(ptr->n))
 				break;
 			fprintf(stdout, "%c", ptr->n);
 			ptr = ptr->next;
 		}
 		puts("");
 	}
+	else
+		puts("");
 }
 
 /**

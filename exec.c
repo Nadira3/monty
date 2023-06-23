@@ -101,16 +101,22 @@ int cmp(char *str1, char *str2)
 void stack_check(char *s, char **t, FILE *f, size_t l)
 {
 	char *inst[8] = {"pint", "pop", "add", "swap", "sub", "mul", "div", "mod"};
-	/*char *zero[2] = {"pchar", "pstr"};*/
 	char *pt = ": can't ", *err, *len = ", stack too short";
-	char *div_err = ": division by zero";
+	char *div_err = ": division by zero", *str_err = ", value out of range";
 	int i = 0;
 
+	err = strcmp(*t, "pop") ? ", stack empty" : " an empty stack";
+	if (!strcmp(*t, "pchar"))
+	{
+		if (isEmpty())
+			err_and_exit(s, t, f, "cisss", 'L', l, pt, *t, err);
+		if (!isascii(stack->n))
+			err_and_exit(s, t, f, "cisss", 'L', l, pt, *t, str_err);
+	}
 	while (i < 8)
 	{
 		if (!strcmp(*t, inst[i]))
 		{
-			err = strcmp(*t, "pop") ? ", stack empty" : " an empty stack";
 			if (i < 2 && isEmpty())
 				err_and_exit(s, t, f, "cisss", 'L', l, pt, *t, err);
 			else if (i > 1 && stack_len() < 2)
