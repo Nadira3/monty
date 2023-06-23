@@ -1,15 +1,5 @@
 #include "monty.h"
 
-global_t *make_node(void)
-{
-	global_t *global_node = malloc(sizeof(global_t));
-	if (!global_node)
-		err_and_exit(NULL, NULL, NULL, "s", "Error: malloc failed");
-	global_node->n = 0;
-	global_node->top = NULL;
-	global_node->tail = NULL;
-	return (global_node);
-}
 /**
  * opcode_check - checks the validity of an instruction
  * @command: opcode instruction
@@ -17,30 +7,34 @@ global_t *make_node(void)
  */
 void (*opcode_check(char *command))(stack_t **stack, unsigned int line_number)
 {
-        int i = 0;
-        instruction_t instruction[] = {
-                {"push", push_func},
-                {"pall", pall_func},
-                /*{"pop", pop_func},
-                {"pint", pint_func},
-                {"nop", nop_func},
-                {"swap", swap_func},*/
-                {NULL, NULL}
-        };
+	int i = 0;
+	instruction_t instruction[] = {
+		{"push", push_func},
+		{"pall", pall_func},
+		/*{"pop", pop_func},*/
+		/*  {"pint", pint_func},*/
+		  /*{"nop", nop_func},*/
+		 /* {"swap", swap_func},*/
+		{NULL, NULL}
+	};
 
-        if (command)
-        {
-                while(instruction[i].opcode)
-                {
-                        if (!(strcmp(command, instruction[i].opcode)))
-                                return (instruction[i].f);
-                        i++;
-                }
-        }
-        return (instruction[i].f);
+	if (command)
+	{
+		while (instruction[i].opcode)
+		{
+			if (!(strcmp(command, instruction[i].opcode)))
+				return (instruction[i].f);
+			i++;
+		}
+	}
+	return (instruction[i].f);
 }
-
-int hasch(char *str)
+/**
+ * hch - checks if a string is an integer
+ * @str: string
+ * Return: 0 or 1
+ */
+int hch(char *str)
 {
 	char *ptr = str;
 
@@ -57,25 +51,26 @@ int hasch(char *str)
 }
 
 /**
- * execute - executes a command line
- * @input_token: array of arguments
- * @line_number: line number of instruction
- * @input: command line
+ * g - executes a command line
+ * @t: array of arguments
+ * @f: file
+ * @l: line number of instruction
+ * @s: command line
  * Return: 0 if sucessful, 1 otherwise
  */
-void (*get_func(char *s, char **tok, FILE *f, size_t line))(stack_t **stack, unsigned int line)
+void (*g(char *s, char **t, FILE * f, size_t l))(stack_t **st, unsigned int l)
 {
-        void (*stack_func)(stack_t **stack, unsigned int line) = NULL;
+	void (*stack_func)(stack_t **stack, unsigned int line) = NULL;
 	char *err = ": unknown instruction ";
 	char *use = ": usage: push integer";
+	char *p = "push";
 
-        stack_func = opcode_check(tok[0]);
-        if (!stack_func)
-		err_and_exit(s, tok, f, "ciss", 'L', line, err, tok[0]);
+	stack_func = opcode_check(t[0]);
+	if (!stack_func)
+		err_and_exit(s, t, f, "ciss", 'L', l, err, t[0]);
 
+	if ((t && t[0] && !strcmp(t[0], p) && !t[1]) || (t && t[1] && hch(t[1])))
+		err_and_exit(s, t, f, "cis", 'L', l, use);
 
-	if ((tok && tok[0] && !strcmp(tok[0], "push") && !tok[1]) || (tok && tok[1] && hasch(tok[1])))
-		err_and_exit(s, tok, f, "cis", 'L', line, use);
-		
-        return (stack_func);
+	return (stack_func);
 }

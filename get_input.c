@@ -1,18 +1,6 @@
 #include "monty.h"
 
 /**
- * free_buf - frees a multidimensional array
- * @input_token; array
- */
-void free_buf(char **input_token)
-{
-	int i = 0;
-
-	while (input_token[i])
-		free(input_token[i++]);
-	free(input_token);
-}
-/**
  * read_input - reads a line of input from a file
  * @file: file stream
  * @input_len: number of characters read from a line
@@ -24,15 +12,17 @@ char *read_input(FILE *file, ssize_t *input_len)
 	char *input = NULL;
 
 	*input_len = getline(&input, &input_size, file);
-	if (*input_len == - 1 && !(feof(file)))
+	if (*input_len == -1 && !(feof(file)))
 		exit(EXIT_FAILURE);
 	if (!(feof(file)))
 		input[*input_len - 1] = '\0';
 	return (input);
 }
+
 /**
  * parse_input - tokenizes an input
  * @input: command line
+ * @f: file
  * Return: command - argument pair, null terminated
  */
 char **parse_input(char *input, FILE *f)
@@ -43,7 +33,7 @@ char **parse_input(char *input, FILE *f)
 
 	if (input)
 	{
-		input_token = malloc(sizeof(char*) * 3);
+		input_token = malloc(sizeof(char *) * 3);
 		if (!input_token)
 			err_and_exit(input, NULL, f, "s", "Error: malloc failed");
 		ptr = input;

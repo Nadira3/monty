@@ -41,43 +41,53 @@ void print_string(va_list pam)
 
 	fprintf(stderr, "%s", ptr ? ptr : "(nil)");
 }
-void err_and_exit(char *input, char **token, FILE *file, const char * const format, ...)
+
+/**
+ * err_and_exit - fill later
+ * @s: string
+ * @tok: array
+ * @f: file
+ * @format: format
+ */
+void err_and_exit(char *s, char **tok, FILE *f, const char * const format, ...)
 {
-        va_list pam;
-        int i = 0, j;
-        void (*print_func)(va_list);
+	va_list pam;
+	int i = 0, j;
+	void (*print_func)(va_list);
 
-        form_t forms[] = {
-                {"c", print_char},
-                {"i", print_int},
-                {"s", print_string},
-                {NULL, NULL}
-        };
+	form_t forms[] = {
+		{"c", print_char},
+		{"i", print_int},
+		{"s", print_string},
+		{NULL, NULL}
+	};
 
-        va_start(pam, format);
+	va_start(pam, format);
 
-        while (format && format[i])
-        {
-                j = 0;
-                while (forms[j].format)
-                {
-                        if (*(forms[j].format) == format[i])
-                        {
-                                print_func = forms[j].f;
-                                print_func(pam);
-                                break;
-                        }
-                        j++;
-                }
-                i++;
-        	va_end(pam);
-        }
-        printf("\n");
-        if (input)
-                free(input);
-        if (token)
-                free_buf(token);
-	if (file)
-		fclose(file);
-        exit(EXIT_FAILURE);
+	while (format && format[i])
+	{
+		j = 0;
+		while (forms[j].format)
+		{
+			if (*(forms[j].format) == format[i])
+			{
+				print_func = forms[j].f;
+				print_func(pam);
+				break;
+			}
+			j++;
+		}
+		i++;
+		va_end(pam);
+	}
+	printf("\n");
+	if (s)
+		free(s);
+	if (tok)
+		free_buf(tok);
+	if (f)
+		fclose(f);
+	if (stack)
+		free_stack(&stack);
+	exit(EXIT_FAILURE);
 }

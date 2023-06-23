@@ -1,16 +1,24 @@
 #include "monty.h"
 
-int isEmpty()
+/**
+ * isEmpty - chexks if a stack is empty
+ * Return: 0 or 1
+ */
+int isEmpty(void)
 {
-	if (!(globv->top))
+	if (!stack)
 		return (1);
 	return (0);
 }
 
+/**
+ * push_func - pushes a node to the stack
+ * @stack: stack
+ * @line_number: line number of fike
+ */
 void push_func(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node = malloc(sizeof(stack_t));
-	(void)stack;
 	(void)line_number;
 
 	if (!node)
@@ -20,25 +28,30 @@ void push_func(stack_t **stack, unsigned int line_number)
 	}
 	node->prev = NULL;
 	node->next = NULL;
-	node->n = globv->n;
+	node->n = n;
 	if (!isEmpty())
 	{
-		node->next = globv->top;
-		(globv->top)->prev = node;
+		node->next = *stack;
+		(*stack)->prev = node;
 	}
-	globv->top = node;
+	*stack = node;
 }
+
+/**
+ * pall_func - pushes a node to the stack
+ * @stack: stack
+ * @line_number: line number of fike
+ */
 void pall_func(stack_t **stack, unsigned int line_number)
 {
-	stack_t *ptr = globv->top;
-	(void)stack;
 	(void)line_number;
+	stack_t *ptr = *stack;
 
 	if (!isEmpty())
 	{
 		while (ptr)
 		{
-			printf("%d\n", ptr->n);
+			fprintf(stdout, "%d\n", ptr->n);
 			ptr = ptr->next;
 		}
 	}
