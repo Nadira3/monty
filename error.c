@@ -39,7 +39,7 @@ void print_string(va_list pam)
 {
 	char *ptr = va_arg(pam, char *);
 
-	fprintf(stderr, "%s\n", ptr ? ptr : "(nil)");
+	fprintf(stderr, "%s", ptr ? ptr : "(nil)");
 }
 
 /**
@@ -80,6 +80,7 @@ void err_and_exit(char *s, char **tok, FILE *f, const char * const format, ...)
 		i++;
 		va_end(pam);
 	}
+	fprintf(stderr, "\n");
 	if (s)
 		free(s);
 	if (tok)
