@@ -66,4 +66,5 @@ void err_and_exit(char *, char **, FILE *, const char * const, ...);
 void (*g(char *, char **, FILE *, size_t))(stack_t **, unsigned int);
 void push_func(stack_t **stack, unsigned int line_number);
 void pall_func(stack_t **stack, unsigned int line_number);
+void pint_func(stack_t **stack, unsigned int line_number);
 #endif

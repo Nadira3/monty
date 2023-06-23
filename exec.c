@@ -11,8 +11,8 @@ void (*opcode_check(char *command))(stack_t **stack, unsigned int line_number)
 	instruction_t instruction[] = {
 		{"push", push_func},
 		{"pall", pall_func},
+		{"pint", pint_func},
 		/*{"pop", pop_func},*/
-		/*  {"pint", pint_func},*/
 		  /*{"nop", nop_func},*/
 		 /* {"swap", swap_func},*/
 		{NULL, NULL}

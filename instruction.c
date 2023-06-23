@@ -56,3 +56,19 @@ void pall_func(stack_t **stack, unsigned int line_number)
 		}
 	}
 }
+
+/**
+ * pint_func - pushes a node to the stack
+ * @stack: stack
+ * @line_number: line number of fike
+ */
+void pint_func(stack_t **stack, unsigned int line_number)
+{
+	stack_t *ptr = *stack;
+	(void)line_number;
+
+	if (!isEmpty())
+	{
+		fprintf(stdout, "%d\n", ptr->n);
+	}
+}
