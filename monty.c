@@ -8,7 +8,7 @@
  */
 int main(int ac, char **av)
 {
-	size_t line_number = 1, flag = 0;
+	size_t line_number = 1;
 	ssize_t input_len = 0;
 	char *input = NULL, **input_token = NULL;
 	FILE *file = ac < 2 ? NULL : fopen(av[1], "r");

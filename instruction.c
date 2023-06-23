@@ -44,8 +44,8 @@ void push_func(stack_t **stack, unsigned int line_number)
  */
 void pall_func(stack_t **stack, unsigned int line_number)
 {
-	(void)line_number;
 	stack_t *ptr = *stack;
+	(void)line_number;
 
 	if (!isEmpty())
 	{
