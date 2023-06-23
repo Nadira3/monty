@@ -80,6 +80,7 @@ void err_and_exit(char *s, char **tok, FILE *f, const char * const format, ...)
 		i++;
 		va_end(pam);
 	}
+	puts("\n");
 	if (s)
 		free(s);
 	if (tok)
