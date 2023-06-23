@@ -45,15 +45,20 @@ void (*opcode_check(char *command))(stack_t **stack, unsigned int line_number)
  */
 int hch(char *str)
 {
-	char *ptr = str;
+	int i = 0;
 
-	if (ptr)
+	if (str)
 	{
-		while (*ptr)
+		while (str[i])
 		{
-			if (*ptr < '0' || *ptr > '9')
+			if (i == 0 && str[i] == '-')
+			{
+				i++;
+				continue;
+			}
+			if (str[i] < '0' || str[i] > '9')
 				return (1);
-			ptr++;
+			i++;
 		}
 	}
 	return (0);
@@ -78,7 +83,7 @@ void (*g(char *s, char **t, FILE * f, size_t l))(stack_t **st, unsigned int l)
 	if (!stack_func)
 		err_and_exit(s, t, f, "ciss", 'L', l, err, t[0]);
 
-	if ((t && t[0] && !strcmp(t[0], p) && !t[1]) || (t && t[1] && hch(t[1])))
+	if ((t && *t && !strcmp(*t, p) && !t[1]) || (!strcmp(*t, p) && t[1] && hch(t[1])))
 		err_and_exit(s, t, f, "cis", 'L', l, use);
 
 	return (stack_func);
