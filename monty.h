@@ -57,6 +57,7 @@ void add_func(stack_t **stack, unsigned int line_number);
 
 stack_t *make_node(void);
 void usage_check(int, FILE *, char *);
+int isEmpty(void);
 char *read_input(FILE *, ssize_t *);
 void free_buf(char **);
 void free_stack(stack_t **);
@@ -68,4 +69,14 @@ void push_func(stack_t **stack, unsigned int line_number);
 void pall_func(stack_t **stack, unsigned int line_number);
 void pint_func(stack_t **stack, unsigned int line_number);
 void pop_func(stack_t **stack, unsigned int line_number);
+void swap_func(stack_t **stack, unsigned int line_number);
+void nop_func(stack_t **stack, unsigned int line_number);
+void add_func(stack_t **stack, unsigned int line_number);
+void sub_func(stack_t **stack, unsigned int line_number);
+void div_func(stack_t **stack, unsigned int line_number);
+void mul_func(stack_t **stack, unsigned int line_number);
+void mod_func(stack_t **stack, unsigned int line_number);
+void pchar_func(stack_t **stack, unsigned int line_number);
+void pstr_func(stack_t **stack, unsigned int line_number);
+
 #endif

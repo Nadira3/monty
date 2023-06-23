@@ -13,8 +13,15 @@ void (*opcode_check(char *command))(stack_t **stack, unsigned int line_number)
 		{"pall", pall_func},
 		{"pint", pint_func},
 		{"pop", pop_func},
-		  /*{"nop", nop_func},*/
-		 /* {"swap", swap_func},*/
+		{"nop", nop_func},
+		{"swap", swap_func},
+		{"add", add_func},
+		{"sub", sub_func},
+		{"div", div_func},
+		{"mul", mul_func},
+		{"mod", mod_func},
+		{"pchar", pchar_func},
+		{"pstr", pstr_func},
 		{NULL, NULL}
 	};
 
