@@ -31,3 +31,23 @@ void free_stack(stack_t **stack)
 		*stack = ptr;
 	}
 }
+
+/**
+ * stack_len - finds the length of a stack
+ * Return: stack length
+ */
+int stack_len(void)
+{
+	int count = 0;
+	stack_t *ptr = stack;
+
+	if (stack)
+	{
+		while (ptr)
+		{
+			count++;
+			ptr = ptr->next;
+		}
+	}
+	return (count);
+}

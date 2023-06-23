@@ -91,6 +91,33 @@ int cmp(char *str1, char *str2)
 }
 
 /**
+ * stack_check - checks if the stack is empty or has enough
+ * parameters for instruction action
+ * @s: input
+ * @t: argument token
+ * @f: file
+ * @l: line number
+ */
+void stack_check(char *s, char **t, FILE *f, size_t l)
+{
+	char *inst[6] = {"pint", "pop", "add", "swap", "sub", "mul"};
+	/*char *zero[4] = {"div", "mod", "pchar", "pstr"};*/
+	char *pt = ": can't ", *err = ", stack empty", *len = ", stack too short";
+	int i = 0;
+
+	while (i < 6)
+	{
+		if (!strcmp(*t, inst[i]))
+		{
+			if (i < 2 && isEmpty())
+				err_and_exit(s, t, f, "cisss", 'L', l, pt, *t, err);
+			else if (i > 1 && stack_len() < 2)
+				err_and_exit(s, t, f, "cisss", 'L', l, pt, *t, len);
+		}
+		i++;
+	}
+}
+/**
  * g - executes a command line
  * @t: array of arguments
  * @f: file
@@ -98,12 +125,12 @@ int cmp(char *str1, char *str2)
  * @s: command line
  * Return: 0 if sucessful, 1 otherwise
  */
-void (*g(char *s, char **t, FILE * f, size_t l))(stack_t **st, unsigned int l)
+void (*g(char *s, char **t, FILE *f, size_t l))(stack_t **st, unsigned int l)
 {
 	void (*stack_func)(stack_t **stack, unsigned int line) = NULL;
 	char *err = ": unknown instruction ";
 	char *use = ": usage: push integer";
-	char *p = "push", *pt = ": can't pint, stack empty";
+	char *p = "push";
 
 	stack_func = opcode_check(t[0]);
 	if (!stack_func)
@@ -112,12 +139,6 @@ void (*g(char *s, char **t, FILE * f, size_t l))(stack_t **st, unsigned int l)
 	if ((t && *t && !cmp(*t, p) && !t[1]) || (!cmp(*t, p) && t[1] && hch(t[1])))
 		err_and_exit(s, t, f, "cis", 'L', l, use);
 	if (t)
-	{
-		if (!strcmp(*t, "pint") || !strcmp(*t, "pop"))
-		{
-			if (isEmpty())
-				err_and_exit(s, t, f, "cis", 'L', l, pt);
-		}
-	}
+		stack_check(s, t, f, l);
 	return (stack_func);
 }

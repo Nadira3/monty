@@ -54,7 +54,7 @@ typedef struct instruction_s
 } instruction_t;
 
 void add_func(stack_t **stack, unsigned int line_number);
-
+int stack_len(void);
 stack_t *make_node(void);
 int cmp(char *str1, char *str2);
 void usage_check(int, FILE *, char *);
