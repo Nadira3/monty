@@ -56,6 +56,7 @@ typedef struct instruction_s
 void add_func(stack_t **stack, unsigned int line_number);
 
 stack_t *make_node(void);
+int cmp(char *str1, char *str2);
 void usage_check(int, FILE *, char *);
 int isEmpty(void);
 char *read_input(FILE *, ssize_t *);
@@ -65,20 +66,20 @@ char **parse_input(char *, FILE *);
 int num_words(char *str);
 void err_and_exit(char *, char **, FILE *, const char * const, ...);
 void (*g(char *, char **, FILE *, size_t))(stack_t **, unsigned int);
-void push_func(stack_t **stack, unsigned int line_number);
-void pall_func(stack_t **stack, unsigned int line_number);
-void pint_func(stack_t **stack, unsigned int line_number);
-void pop_func(stack_t **stack, unsigned int line_number);
-void swap_func(stack_t **stack, unsigned int line_number);
-void nop_func(stack_t **stack, unsigned int line_number);
-void add_func(stack_t **stack, unsigned int line_number);
-void sub_func(stack_t **stack, unsigned int line_number);
-void div_func(stack_t **stack, unsigned int line_number);
-void mul_func(stack_t **stack, unsigned int line_number);
-void mod_func(stack_t **stack, unsigned int line_number);
-void pchar_func(stack_t **stack, unsigned int line_number);
-void pstr_func(stack_t **stack, unsigned int line_number);
-void rotl_func(stack_t **stack, unsigned int line_number);
-void rotr_func(stack_t **stack, unsigned int line_number);
+void push_func(stack_t **, unsigned int);
+void pall_func(stack_t **, unsigned int);
+void pint_func(stack_t **, unsigned int);
+void pop_func(stack_t **, unsigned int);
+void swap_func(stack_t **, unsigned int);
+void nop_func(stack_t **, unsigned int);
+void add_func(stack_t **, unsigned int);
+void sub_func(stack_t **, unsigned int);
+void div_func(stack_t **, unsigned int);
+void mul_func(stack_t **, unsigned int);
+void mod_func(stack_t **, unsigned int);
+void pstr_func(stack_t **, unsigned int);
+void rotl_func(stack_t **, unsigned int);
+void rotr_func(stack_t **, unsigned int);
+void pchar_func(stack_t **, unsigned int);
 
 #endif

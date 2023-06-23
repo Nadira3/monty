@@ -38,6 +38,7 @@ void (*opcode_check(char *command))(stack_t **stack, unsigned int line_number)
 	}
 	return (instruction[i].f);
 }
+
 /**
  * hch - checks if a string is an integer
  * @str: string
@@ -65,6 +66,31 @@ int hch(char *str)
 }
 
 /**
+ * cmp - compares to string to check if they are an exact match
+ * @str1: first string
+ * @str2: second string
+ * Return: 1 if strings match, otherwise 0
+ */
+int cmp(char *str1, char *str2)
+{
+	char *ptr1 = str1, *ptr2 = str2;
+
+	if (!str1 || !str2)
+		return (0);
+	if (ptr1 && ptr2)
+	{
+		while (*ptr1 || *ptr2)
+		{
+			if (*ptr2 != *ptr1)
+				return (1);
+			ptr1++;
+			ptr2++;
+		}
+	}
+	return (0);
+}
+
+/**
  * g - executes a command line
  * @t: array of arguments
  * @f: file
@@ -77,14 +103,21 @@ void (*g(char *s, char **t, FILE * f, size_t l))(stack_t **st, unsigned int l)
 	void (*stack_func)(stack_t **stack, unsigned int line) = NULL;
 	char *err = ": unknown instruction ";
 	char *use = ": usage: push integer";
-	char *p = "push";
+	char *p = "push", *pt = ": can't pint, stack empty";
 
 	stack_func = opcode_check(t[0]);
 	if (!stack_func)
 		err_and_exit(s, t, f, "ciss", 'L', l, err, t[0]);
 
-	if ((t && *t && !strcmp(*t, p) && !t[1]) || (!strcmp(*t, p) && t[1] && hch(t[1])))
+	if ((t && *t && !cmp(*t, p) && !t[1]) || (!cmp(*t, p) && t[1] && hch(t[1])))
 		err_and_exit(s, t, f, "cis", 'L', l, use);
-
+	if (t)
+	{
+		if (!strcmp(*t, "pint"))
+		{
+			if (isEmpty())
+				err_and_exit(s, t, f, "cis", 'L', l, pt);
+		}
+	}
 	return (stack_func);
 }
