@@ -39,6 +39,8 @@ char **parse_input(char *input, FILE *f)
 		ptr = input;
 		while (*ptr && *ptr == ' ')
 			ptr++;
+		if (*ptr == '#')
+			*ptr = '\0';
 		str_token = strtok(ptr, " ");
 		while (i < 2 && str_token)
 		{
@@ -52,6 +54,8 @@ char **parse_input(char *input, FILE *f)
 			strncpy(input_token[i], str_token, len);
 			input_token[i][len] = '\0';
 			str_token = strtok(NULL, " ");
+			if (str_token && *str_token == '#')
+				*str_token = '\0';
 			i++;
 		}
 		input_token[i] = NULL;
