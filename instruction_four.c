@@ -19,6 +19,8 @@ void rotr_func(stack_t **stack, unsigned int line_number)
 	}
 	if (!isEmpty())
 	{
+		if (stack_len() < 2)
+			return;
 		while (ptr->next)
 			ptr = ptr->next;
 		temp = ptr->n;
