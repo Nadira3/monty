@@ -22,7 +22,8 @@ void rotr_func(stack_t **stack, unsigned int line_number)
 		while (ptr->next)
 			ptr = ptr->next;
 		temp = ptr->n;
-		ptr->prev->next = NULL;
+		if (ptr->prev)
+			ptr->prev->next = NULL;
 		free(ptr);
 		node->n = temp;
 		node->prev = NULL;
