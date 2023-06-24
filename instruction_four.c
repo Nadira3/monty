@@ -11,6 +11,8 @@ void rotr_func(stack_t **stack, unsigned int line_number)
 	stack_t *ptr = *stack, *node = NULL;
 	(void)line_number;
 
+	if (stack_len() < 2)
+		return;
 	node = malloc(sizeof(stack_t));
 	if (!node)
 	{
@@ -19,13 +21,10 @@ void rotr_func(stack_t **stack, unsigned int line_number)
 	}
 	if (!isEmpty())
 	{
-		if (stack_len() < 2)
-			return;
 		while (ptr->next)
 			ptr = ptr->next;
 		temp = ptr->n;
-		if (ptr->prev)
-			ptr->prev->next = NULL;
+		ptr->prev->next = NULL;
 		free(ptr);
 		node->n = temp;
 		node->prev = (*stack)->prev;
