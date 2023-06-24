@@ -7,20 +7,26 @@
  */
 void rotr_func(stack_t **stack, unsigned int line_number)
 {
-	stack_t *temp, *ptr = *stack;
+	int temp = 0;
+	stack_t *ptr = *stack, *node = NULL;
 	(void)line_number;
 
+	node = malloc(sizeof(stack_t));
+	if (!node)
+	{
+		fprintf(stderr, "Error: malloc failed");
+		return;
+	}
 	if (!isEmpty())
 	{
-		while ((*stack)->next)
-			*stack = (*stack)->next;
-		ptr = *stack;
-		while (ptr)
-		{
-			temp = ptr->next;
-			ptr->next = ptr->prev;
-			ptr->prev = temp;
+		while (ptr->next)
 			ptr = ptr->next;
-		}
+		temp = ptr->n;
+		ptr->prev->next = NULL;
+		free(ptr);
+		node->n = temp;
+		node->prev = NULL;
+		node->next = *stack;
+		*stack = node;
 	}
 }
