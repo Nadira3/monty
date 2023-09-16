@@ -5,11 +5,12 @@
  * @command: opcode instruction
  * Return: function pointer
  */
-void (*opcode_check(char *command))(stack_t **stack, unsigned int line_number)
+void (*opcode_check(char *command, int flag))(stack_t **stack, unsigned int line_number)
 {
 	int i = 0;
 	instruction_t instruction[] = {
-		{"push", push_func},
+		{"push", push_stack},
+		{"push", push_queue},
 		{"pall", pall_func},
 		{"pint", pint_func},
 		{"pop", pop_func},
@@ -32,7 +33,11 @@ void (*opcode_check(char *command))(stack_t **stack, unsigned int line_number)
 		while (instruction[i].opcode)
 		{
 			if (!(strcmp(command, instruction[i].opcode)))
+			{
+				if (!(strcmp(command, "push")) && flag)
+					i++;
 				return (instruction[i].f);
+			}
 			i++;
 		}
 	}
@@ -135,14 +140,14 @@ void stack_check(char *s, char **t, FILE *f, size_t l)
  * @s: command line
  * Return: 0 if sucessful, 1 otherwise
  */
-void (*g(char *s, char **t, FILE *f, size_t l))(stack_t **st, unsigned int l)
+void (*g(char *s, char **t, FILE *f, size_t l, int flag))(stack_t **st, unsigned int l)
 {
 	void (*stack_func)(stack_t **stack, unsigned int line) = NULL;
 	char *err = ": unknown instruction ";
 	char *use = ": usage: push integer";
 	char *p = "push";
 
-	stack_func = opcode_check(t[0]);
+	stack_func = opcode_check(t[0], flag);
 	if (!stack_func)
 		err_and_exit(s, t, f, "ciss", 'L', l, err, t[0]);
 

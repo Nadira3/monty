@@ -33,3 +33,35 @@ void rotr_func(stack_t **stack, unsigned int line_number)
 		*stack = node;
 	}
 }
+
+/**
+ * push_queue - pushes a node to the stack
+ * @stack: stack
+ * @line_number: line number of fike
+ */
+void push_queue(stack_t **stack, unsigned int line_number)
+{
+	stack_t *node = malloc(sizeof(stack_t));
+	stack_t *ptr = NULL;
+	(void)line_number;
+
+	if (!node)
+	{
+		fprintf(stderr, "Error: malloc failed");
+		return;
+	}
+	node->prev = NULL;
+	node->next = NULL;
+	node->n = n;
+	if (!isEmpty())
+	{
+		ptr = *stack;
+		while (ptr->next)
+			ptr = ptr->next;
+
+		ptr->next = node;
+		node->prev = ptr;
+	}
+	else
+		*stack = node;
+}

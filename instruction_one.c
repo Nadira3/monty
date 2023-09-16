@@ -12,11 +12,11 @@ int isEmpty(void)
 }
 
 /**
- * push_func - pushes a node to the stack
+ * push_stack - pushes a node to the stack
  * @stack: stack
  * @line_number: line number of fike
  */
-void push_func(stack_t **stack, unsigned int line_number)
+void push_stack(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node = malloc(sizeof(stack_t));
 	(void)line_number;
