@@ -63,5 +63,5 @@ void push_queue(stack_t **stack, unsigned int line_number)
 		node->prev = ptr;
 	}
 	else
-		stack = node;
+		*stack = node;
 }
