@@ -35,9 +35,9 @@ void rotr_func(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * push_queue - pushes a node to the stack
+ * push_queue - pushes a node to the stack in FIFO
  * @stack: stack
- * @line_number: line number of fike
+ * @line_number: line number of file
  */
 void push_queue(stack_t **stack, unsigned int line_number)
 {
@@ -63,5 +63,5 @@ void push_queue(stack_t **stack, unsigned int line_number)
 		node->prev = ptr;
 	}
 	else
-		*stack = node;
+		stack = node;
 }
